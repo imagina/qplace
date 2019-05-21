@@ -1,10 +1,14 @@
 {
   "name": "@imagina/qplaces",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Module to manage places",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@imagina/qsite": "^0.0.10",
+    "axios": "^0.18.0"
   },
   "repository": {
     "type": "git",
