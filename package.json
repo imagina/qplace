@@ -1,0 +1,28 @@
+{
+  "name": "@imagina/qplaces",
+  "version": "0.0.1",
+  "description": "Module to manage places",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imagina/qplace.git"
+  },
+  "keywords": [
+    "place",
+    "gmaps",
+    "qplaces",
+    "places",
+    "maps",
+    "branch",
+    "offices"
+  ],
+  "author": "http://imaginacolombia.com/",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imagina/qplace/issues"
+  },
+  "homepage": "https://github.com/imagina/qplace#readme"
+}
