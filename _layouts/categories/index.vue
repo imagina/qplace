@@ -10,14 +10,14 @@
     <!--Content-->
     <div class="relative-position">
       <!--Table-->
-      <div class="col-12">
+      <div class="col-12 backend-page">
         <q-table
           :data="table.data"
           :columns="table.columns"
           :pagination.sync="table.pagination"
           @request="getData"
           :filter="table.filter"
-          class="shadow-1"
+          class="shadow-1 border-top-color"
         >
           <!--Table slot left-->
           <template slot="top-left" slot-scope="props">
@@ -27,10 +27,10 @@
           <!--Table slot right-->
           <template slot="top-right" slot-scope="props">
             <!--Button new record-->
-            <q-btn icon="fas fa-edit" color="primary" label="New Category"
+            <q-btn icon="fas fa-edit" color="positive" label="New Category"
                    @click="formItemShow = true; itemIdToEdit = false"/>
             <!--Button refresh data-->
-            <q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
+            <q-btn icon="fas fa-sync-alt" color="info" class="q-ml-xs"
                    @click="getDataTable(true)">
               <q-tooltip :delay="300">Refresh Data</q-tooltip>
             </q-btn>
@@ -39,7 +39,7 @@
           <!--= Custom Columns =-->
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
-            <q-btn color="primary" icon="fas fa-pen" size="sm"
+            <q-btn color="positive" icon="fas fa-pen" size="sm"
                    @click="itemIdToEdit = props.row.id; formItemShow = true">
               <q-tooltip :delay="300">Edit</q-tooltip>
             </q-btn>
@@ -53,12 +53,7 @@
       </div>
 
       <!--Loading-->
-      <q-inner-loading :visible="loading">
-        <div class="q-box-inner-loading">
-          <q-spinner-hourglass size="50px" color="primary"/>
-          <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-        </div>
-      </q-inner-loading>
+      <inner-loading :visible="loading" />
     </div>
 
     <!--Form category (create and/or update)-->
@@ -92,10 +87,12 @@
   import placesServices from '@imagina/qplaces/_services/index';
   //Component
   import formCategory from '@imagina/qplaces/_components/category/admin/form'
+  import innerLoading from 'src/components/master/innerLoading'
 
   export default {
     components: {
-      formCategory
+      formCategory,
+      innerLoading
     },
     mounted() {
       this.$nextTick(function () {
@@ -188,15 +185,5 @@
 
 <style lang="stylus">
   @import "~variables";
-  #productCategoriesIndexPage
-    .q-table-container
-      border-top 3px solid $primary
 
-      .q-search
-        border 1px solid $grey-4
-        padding 6px 9px
-        border-radius 5px
-
-    .q-btn
-      box-shadow none
 </style>

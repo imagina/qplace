@@ -1,39 +1,35 @@
 <template>
   <div id="placesIndex"
-       class="q-layout-page row justify-center layout-padding">
+       class="q-layout-page row layout-padding">
+
+    <!--TITLE-->
+    <h1 class="q-headline text-primary">
+      <q-icon name="fas fa-calendar-check"></q-icon>
+      Schedules
+    </h1>
     
-    <div class="text_title text-blue-9 col-12 q-title text-right">
-      <span>Schedules</span>
-    
-    </div>
-    
-    <div class="col-12">
-      
-      
+    <div class="col-12 backend-page relative-position">
       <q-table
-        :loading="loading"
         :data="dataTable"
         :columns="columns"
         :pagination.sync="pagination"
-        
         row-key="filename"
         color="primary"
+        class="border-top-color"
         @request="getData"
       >
         
         <!--= Full Page =-->
         <template slot="top-right" slot-scope="props">
           <div class="row justify-end items-center full-width">
-            <q-btn
-              flat round dense
-              :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-              @click="props.toggleFullscreen"
-            />
-            
-            <q-btn color="primary"
-                   icon="fas fa-sync"
-                   @click="getData({pagination:pagination,search:filter.search},true)"
-            ></q-btn>
+            <!--Button new record-->
+            <q-btn icon="fas fa-edit" color="positive" label="New Schedule"
+                   v-if="$auth.hasAccess('iplaces.schedules.create')"
+                   @click="showEditOrCreateSchedule(false)" />
+            <q-btn color="info" icon="fas fa-sync" class="q-ml-xs"
+                   @click="getData({pagination:pagination,search:filter.search},true)">
+              <q-tooltip :delay="300">Refresh Data</q-tooltip>
+            </q-btn>
           </div>
         </template>
         
@@ -50,17 +46,20 @@
         <q-td slot="body-cell-actions"
               slot-scope="props" :props="props">
           
-          <q-btn icon="fas fa-pen" color="positive" round size="xs" class="q-mx-xs"
-                 @click="showEditOrCreateSchedule(props.row)" v-if="$auth.hasAccess('iplaces.places.edit')"/>
-          <q-btn icon="far fa-trash-alt" color="negative" size="xs" class="q-mx-xs" round
-                 @click="dialogDeleteSchedule.handler(props.row.id)" v-if="$auth.hasAccess('iplaces.places.destroy')"/>
+          <q-btn icon="fas fa-pen" color="positive" size="xs" class="q-mx-xs"
+                 @click="showEditOrCreateSchedule(props.row)" v-if="$auth.hasAccess('iplaces.schedules.edit')"/>
+          <q-btn icon="far fa-trash-alt" color="negative" size="xs" class="q-mx-xs"
+                 @click="dialogDeleteSchedule.handler(props.row.id)" v-if="$auth.hasAccess('iplaces.schedules.destroy')"/>
         </q-td>
       
       </q-table>
+
+      <!--Loading-->
+      <inner-loading :visible="loading"></inner-loading>
     </div>
     <q-modal v-model="modalSchedule"
              v-if="scheduleToEdit"
-             id="sliderModalEdit"
+             id="sliderModalEdit" class="backend-page"
              :content-css="{minWidth: '80vw', minHeight: '80vh'}">
       <q-modal-layout>
         <q-toolbar slot="header">
@@ -89,7 +88,7 @@
               :error="$v.locale.formTemplate.title.$error"
               error-label="This field is required"
             >
-              <q-input :float-label="'Title ('+locale.language+')'" type="text" v-model="locale.formTemplate.title"/>
+              <q-input :stack-label="'Title ('+locale.language+')'" type="text" v-model="locale.formTemplate.title"/>
             </q-field>
             <div class="row " v-for="(range,index) in locale.formTemplate.options" :key="index" >
           
@@ -97,46 +96,35 @@
              <div class="col-12">
                <div class="row gutter-sm text-center items-center">
                  <div class="col-12 col-md-5">
-                   <q-datetime float-label="from" v-model="range.from" type="time" format="hh:mm a" />
+                   <q-datetime stack-label="from" v-model="range.from" type="time" format="hh:mm a" />
                  </div>
     
                  <div class="col-12 col-md-5">
-                   <q-datetime float-label="to" v-model="range.to" type="time" format="hh:mm a" />
+                   <q-datetime stack-label="to" v-model="range.to" type="time" format="hh:mm a" />
                  </div>
     
-                 <div class="col-12 col-md-2">
-                   <q-btn icon="fas fa-trash-alt" color="negative" round size="xs" @click="deleteRange(index)"/>
+                 <div class="col-12 col-md-2 q-mt-lg items-center">
+                   <q-btn icon="fas fa-trash-alt" color="negative" size="sm" @click="deleteRange(index)"/>
                  </div>
-  
                </div>
-
              </div>
-             
-
             </div>
             
             <div class="row justify-end q-my-sm">
-              <q-btn icon="add" color="positive" round size="xs" @click="addRange()">
+              <q-btn icon="add" color="positive" size="sm" @click="addRange()">
                 <q-tooltip :offset="[5,5]">
                   Add range
                 </q-tooltip>
               </q-btn>
             </div>
-            
           </div>
-          
-        
+
           <div class="col-12 text-center">
-            <q-btn color="primary" label="Save" @click="updateOrCreateSchedule();"/>
+            <q-btn color="positive" label="Save" @click="updateOrCreateSchedule();"/>
           </div>
-        
         </div>
       </q-modal-layout>
     </q-modal>
-    
-    <q-page-sticky position="bottom-right" :offset="[18, 18]" v-if="$auth.hasAccess('iplaces.places.create')">
-      <q-btn round color="positive" icon="add" @click="showEditOrCreateSchedule(false)"/>
-    </q-page-sticky>
   </div>
 </template>
 <script>
@@ -152,6 +140,7 @@
   import mediaForm from '@imagina/qmedia/_components/form'
   import locales from '@imagina/qsite/_components/locales'
   import recursiveList from 'src/components/master/recursiveListSelect'
+  import innerLoading from 'src/components/master/innerLoading'
   
   /*Services*/
   import placesService from '@imagina/qplaces/_services/index'
@@ -162,7 +151,8 @@
       mediaForm,
       locales,
       Treeselect,
-      recursiveList
+      recursiveList,
+      innerLoading
     },
   
     validations() {

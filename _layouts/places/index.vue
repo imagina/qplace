@@ -1,39 +1,35 @@
 <template>
   <div id="placesIndex"
-       class="q-layout-page row justify-center layout-padding">
+       class="q-layout-page row layout-padding">
+
+    <!--TITLE-->
+    <h1 class="q-headline text-primary">
+      <q-icon name="fas fa-map-marked-alt"></q-icon>
+      Places
+    </h1>
     
-    <div class="text_title text-blue-9 col-12 q-title text-right">
-      <span>Places</span>
-    
-    </div>
-    
-    <div class="col-12">
-      
-      
+    <div class="col-12 backend-page relative-position">
       <q-table
-        :loading="loading"
         :data="dataTable"
         :columns="columns"
         :pagination.sync="pagination"
-        
         row-key="filename"
         color="primary"
         @request="getData"
+        class="shadow-1 border-top-color"
       >
         
         <!--= Full Page =-->
         <template slot="top-right" slot-scope="props">
           <div class="row justify-end items-center full-width">
-            <q-btn
-              flat round dense
-              :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-              @click="props.toggleFullscreen"
-            />
-            
-            <q-btn color="primary"
-                   icon="fas fa-sync"
-                   @click="getData({pagination:pagination,search:filter.search},true)"
-            ></q-btn>
+            <!--Button new record-->
+            <q-btn icon="fas fa-edit" color="positive" label="New Places"
+                   v-if="$auth.hasAccess('iplaces.places.create')"
+                   @click="showEditOrCreatePlace(false)" />
+            <q-btn color="info" icon="fas fa-sync" class="q-ml-xs"
+                   @click="getData({pagination:pagination,search:filter.search},true)">
+              <q-tooltip :delay="300">Refresh Data</q-tooltip>
+            </q-btn>
           </div>
         </template>
         
@@ -49,17 +45,19 @@
         <!--= Actions =-->
         <q-td slot="body-cell-actions"
               slot-scope="props" :props="props">
-          
-          <q-btn icon="fas fa-pen" color="positive" round size="xs" class="q-mx-xs"
+          <q-btn icon="fas fa-pen" color="positive" size="sm" class="q-mx-xs"
                  @click="showEditOrCreatePlace(props.row)" v-if="$auth.hasAccess('iplaces.places.edit')"/>
-          <q-btn icon="far fa-trash-alt" color="negative" size="xs" class="q-mx-xs" round
+          <q-btn icon="far fa-trash-alt" color="negative" size="sm" class="q-mx-xs"
                  @click="dialogDeletePlace.handler(props.row.id)" v-if="$auth.hasAccess('iplaces.places.destroy')"/>
         </q-td>
-      
       </q-table>
+
+      <!--Loading-->
+      <inner-loading :visible="loading"></inner-loading>
     </div>
+
     <q-modal v-model="modalPlace"
-             id="sliderModalEdit"
+             id="sliderModalEdit" class="backend-page"
              :content-css="{minWidth: '80vw', minHeight: '80vh'}">
       <q-modal-layout>
         <q-toolbar slot="header">
@@ -88,20 +86,20 @@
               :error="$v.locale.formTemplate.title.$error"
               error-label="This field is required"
             >
-              <q-input :float-label="'Title ('+locale.language+')'" type="text" v-model="locale.formTemplate.title"/>
+              <q-input :stack-label="'Title ('+locale.language+')'" type="text" v-model="locale.formTemplate.title"/>
             </q-field>
             <q-field
               :error="$v.locale.formTemplate.description.$error"
               error-label="This field is required"
             >
-              <q-input :float-label="'Slug ('+locale.language+')'" type="text" v-model="locale.formTemplate.slug"/>
+              <q-input :stack-label="'Slug ('+locale.language+')'" type="text" v-model="locale.formTemplate.slug"/>
             </q-field>
             
             <q-field
               :error="$v.locale.formTemplate.summary.$error"
               error-label="This field is required"
             >
-              <q-input :float-label="'Summary ('+locale.language+')'" type="textarea"
+              <q-input :stack-label="'Summary ('+locale.language+')'" type="textarea"
                        v-model="locale.formTemplate.summary" rows="3"/>
             </q-field>
             
@@ -123,7 +121,8 @@
           <div class="col-12 col-md-4" v-if="locale.success">
         
             <q-field>
-              <q-input color="primary" v-model="locale.formTemplate.address.address" placeholder="Type at least 3 characters">
+              <q-input color="primary" v-model="locale.formTemplate.address.address" stack-label="Address"
+                       placeholder="Type at least 3 characters">
                 <q-autocomplete
                   @search="searchAddress"
                   :min-characters="3"
@@ -134,22 +133,21 @@
   
             <div id="mapCanvas" style="width:100%; height:300px"></div>
             <q-field>
-              <q-input float-label="Phone 1" type="number" v-model="locale.formTemplate.options.phone1"/>
+              <q-input stack-label="Phone 1" type="number" v-model="locale.formTemplate.options.phone1"/>
             </q-field>
             
             <q-field>
-              <q-input float-label="Phone 2" type="number" v-model="locale.formTemplate.options.phone2"/>
+              <q-input stack-label="Phone 2" type="number" v-model="locale.formTemplate.options.phone2"/>
             </q-field>
             
             <q-field>
-              <q-input float-label="Phone 3" type="number" v-model="locale.formTemplate.options.phone3"/>
+              <q-input stack-label="Phone 3" type="number" v-model="locale.formTemplate.options.phone3"/>
             </q-field>
             
             <!--Category-->
             <div class="q-caption q-my-sm text-grey">Category</div>
             <treeselect
               :clearable="false"
-              :append-to-body="true"
               :options="options.categories"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.categoryId"
@@ -167,20 +165,15 @@
                             :items="options.schedules"/>
             
             <q-progress indeterminate color="primary" v-if="loadingCategories"/>
-          
           </div>
           
           <div class="col-12 text-center">
-            <q-btn color="primary" label="Save" @click="updateOrCreatePlace();"/>
+            <q-btn color="positive" label="Save" @click="updateOrCreatePlace();"/>
           </div>
         
         </div>
       </q-modal-layout>
     </q-modal>
-    
-    <q-page-sticky position="bottom-right" :offset="[18, 18]" v-if="$auth.hasAccess('iplaces.places.create')">
-      <q-btn round color="positive" icon="add" @click="showEditOrCreatePlace(false)"/>
-    </q-page-sticky>
   </div>
 </template>
 <script>
@@ -197,6 +190,7 @@
   import mediaForm from '@imagina/qmedia/_components/form'
   import locales from '@imagina/qsite/_components/locales'
   import recursiveList from 'src/components/master/recursiveListSelect'
+  import innerLoading from 'src/components/master/innerLoading'
   
   /*Services*/
   import placesService from '@imagina/qplaces/_services/index'
@@ -207,7 +201,8 @@
       mediaForm,
       locales,
       Treeselect,
-      recursiveList
+      recursiveList,
+      innerLoading
     },
     
     validations() {
