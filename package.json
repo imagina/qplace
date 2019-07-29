@@ -1,55 +1,21 @@
 {
-  "_from": "@imagina/qplaces@0.0.3",
-  "_id": "@imagina/qplaces@0.0.3",
-  "_inBundle": false,
-  "_integrity": "sha512-j+A8gsWCksJVhB6uNgIGXhmReNKRNFKW/s0Vg+vqKOgUFpRDrTrQ2kQW1JzRTPDSA0/bfLB3tIf8ipVJJPb+1w==",
-  "_location": "/@imagina/qplaces",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "@imagina/qplaces@0.0.3",
-    "name": "@imagina/qplaces",
-    "escapedName": "@imagina%2fqplaces",
-    "scope": "@imagina",
-    "rawSpec": "0.0.3",
-    "saveSpec": null,
-    "fetchSpec": "0.0.3"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/@imagina/qplaces/-/qplaces-0.0.3.tgz",
-  "_shasum": "712205efa7ac73cb8218490bb6d9729b20479435",
-  "_spec": "@imagina/qplaces@0.0.3",
-  "_where": "D:\\imagina\\projects\\baseQuasar\\back-end",
-  "author": {
-    "name": "http://imaginacolombia.com/"
-  },
+  "author": "http://imaginacolombia.com",
   "bugs": {
     "url": "https://github.com/imagina/qplace/issues"
   },
   "bundleDependencies": false,
-  "dependencies": {
-    "@imagina/qsite": "^0.0.10",
-    "axios": "^0.18.0"
-  },
   "deprecated": false,
-  "description": "Module to manage places",
+  "description": "Package to use Iplace in Base Quasar 1.0.0",
   "homepage": "https://github.com/imagina/qplace#readme",
   "keywords": [
-    "place",
-    "gmaps",
-    "qplaces",
-    "places",
-    "maps",
-    "branch",
-    "offices"
+    "quasar",
+    "laravel",
+    "asgardcms",
+    "qplace"
   ],
   "license": "ISC",
   "main": "index.js",
-  "name": "@imagina/qplaces",
+  "name": "@imagina/qplace",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imagina/qplace.git"
@@ -57,5 +23,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.3"
+  "version": "1.0.0"
 }
