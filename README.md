@@ -1,4 +1,4 @@
-## QPLACE  | 1.0.0
+## QPLACE  | 1.0.1
 
 ## Installation
 

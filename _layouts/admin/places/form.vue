@@ -1,15 +1,9 @@
 <template>
-  <div id="adminPlacesFrom" class="q-layout-page layout-padding">
-    <!--TITLE-->
-    <h1 class="q-headline text-primary">
-      <q-icon v-if="$route.meta.icon" :name="$route.meta.icon"/>
-      {{$tr($route.meta.title)}}
-    </h1>
-
+  <div id="adminPlacesFrom">
     <!--Content-->
     <div class="relative-position q-mb-lg backend-page">
       <!--Form-->
-      <div class="border-top-color shadow-1">
+      <div class="box">
         <div class="row gutter-x-sm">
           <!--Languages-->
           <div class="col-12">
