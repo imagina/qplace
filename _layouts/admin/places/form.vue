@@ -434,7 +434,7 @@
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
-              this.$router.push({name: 'iplaces.places.index'})
+              this.$router.push({name: 'qplace.admin.places.index'})
               break;
             case 3://Reset and init form
               this.$refs.localeComponent.vReset()
@@ -451,7 +451,7 @@
           this.loading.page = true
           this.$crud.update(this.configName, this.itemId, this.locale.form).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
-            this.$router.push({name: 'iplaces.places.index'})//Redirect to index
+            this.$router.push({name: 'qplace.admin.places.index'})//Redirect to index
             this.loading.page = false
           }).catch(error => {
             this.loading.page = false
