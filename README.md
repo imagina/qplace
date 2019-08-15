@@ -1,8 +1,8 @@
-## QPLACE  | 1.0.1
+## QPLACE  | 1.0.2
 
 ## Installation
 
-`` npm i @imagina/qplace@1.0.0 ``
+`` npm i @imagina/qplace@1.0.2 ``
 
 ## API Routes
 
