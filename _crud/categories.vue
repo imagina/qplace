@@ -38,25 +38,31 @@
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
             title: {
-              label: this.$tr('ui.form.title'),
+              label: `${this.$tr('ui.form.title')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             slug: {
-              label: this.$tr('ui.form.slug'),
+              label: `${this.$tr('ui.form.slug')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             description: {
-              label: this.$tr('ui.form.description'),
+              label: `${this.$tr('ui.form.description')}*`,
               value: '',
               type: 'html',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             metaTitle: {
               label: this.$tr('ui.form.metaTitle'),
@@ -78,8 +84,8 @@
               isFakeField : true,
               type: 'select',
               options: [
-                {label: this.$tr('ui.label.yes'), id: 1},
-                {label: this.$tr('ui.label.no'), id: 0},
+                {label: this.$tr('ui.label.yes'), value: 1},
+                {label: this.$tr('ui.label.no'), value: 0},
               ]
             },
             parentId: {
@@ -98,8 +104,8 @@
               value: '1',
               type: 'select',
               options: [
-                {label: this.$tr('ui.label.enabled'), id: '1'},
-                {label: this.$tr('ui.label.disabled'), id: '0'},
+                {label: this.$tr('ui.label.enabled'), value: '1'},
+                {label: this.$tr('ui.label.disabled'), value: '0'},
               ],
             },
             mediasSingle: {
