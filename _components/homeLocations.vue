@@ -1,12 +1,12 @@
 <template>
-  <div v-if="category && Object.keys(category).length > 0">
+  <div v-if="category">
     <div class="home-locations" :style="'background: url('+category.mainImage.path+')'">
       <div class="q-container text-white relative-position q-py-xl">
-        <div class="bg-primary text-white text-h4 absolute q-px-md q-py-md location-title">
+        <h1 class="q-ma-none bg-primary text-white text-h4 absolute q-px-md q-py-md location-title">
           {{ category.title }}
-        </div>
+        </h1>
         <div class="row q-py-xl">
-          <div class="col-12 col-md-6 q-py-xl place-content" v-for="(place,i) in places"
+          <div class="col-12 col-md-6 q-py-xl place-content" v-for="(place,i) in category.places"
                :key="i" @click="$helper.map(place.address.address)">
             <div class="row gutter-sm">
               <div class="col-2 col-sm-4 text-right">
@@ -26,20 +26,8 @@
 <script>
   export default {
     name: "homeLocations",
-    data() {
-      return {
-        places: [],
-        category: {},
-        ubication: [],
-        loading: true,
-        openedDialog: false,
-        currentUbicationId: 1,
-      }
-    },
     props: {
-      slug: {
-        default: null
-      }
+      slug: {default: null}
     },
     beforeRouteLeave(to, from, next) {
       // closing modal details if is opened
@@ -50,44 +38,19 @@
         next(false)
       }
     },
-
-    mounted: function () {
-      this.$nextTick(function () {
-        this.getPlaces();
-      })
+    mounted() {
+    },
+    data() {
+      return {
+        openedDialog: false
+      }
+    },
+    computed:{
+      category(){
+        return this.$store.state.qcrudMaster.show[`qplace-places-${this.slug}`].data
+      }
     },
     methods: {
-      async getPlaces() {
-        this.loading = true;
-        let params2 = {
-          params: {
-            filter: {
-              field: 'slug'
-            }
-          }
-        }
-        await this.$crud.show('apiRoutes.qplace.categories', this.slug, params2).then(response => {
-          this.category = response.data
-          this.loading = false
-        }).catch(error => {
-          this.loading = false
-        })
-        this.loading = true
-        let params = {
-          params: {
-            include: 'schedules',
-            filter: {
-              categories: this.category.id
-            }
-          }
-        }
-        await this.$crud.index('apiRoutes.qplace.places', params).then(response => {
-          this.places = response.data;
-          this.loading = false;
-        }).catch(error => {
-          this.loading = false
-        })
-      },
       gotoTel: function (tel) {
         window.location.href = "tel:" + tel;
       }

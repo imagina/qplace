@@ -122,12 +122,11 @@
     <!--Loading-->
     <inner-loading :visible="loading.page"/>
   </div>
-  </div>
 </template>
 <script>
   //Plugins
-  import { required } from 'vuelidate/lib/validators'
-  import { gmaps } from '@imagina/qplace/_plugins/gmaps'
+  import {required} from 'vuelidate/lib/validators'
+  import {gmaps} from '@imagina/qplace/_plugins/gmaps'
   //Components
   import locales from '@imagina/qsite/_components/locales'
   import mediaForm from '@imagina/qmedia/_components/form'
@@ -136,17 +135,17 @@
 
   export default {
     props: {},
-    components: { locales, mediaForm, recursiveList, schedulesForm },
+    components: {locales, mediaForm, recursiveList, schedulesForm},
     watch: {},
-    validations () {
+    validations() {
       return this.getObjectValidation()
     },
-    mounted () {
+    mounted() {
       this.$nextTick(function () {
         this.init()
       })
     },
-    data () {
+    data() {
       return {
         loading: {
           page: false,
@@ -203,11 +202,11 @@
             metaDescription: ''
           },
           validations: {
-            title: { required },
-            slug: { required },
-            summary: { required },
-            description: { required },
-            categoryId: { required }
+            title: {required},
+            slug: {required},
+            summary: {required},
+            description: {required},
+            categoryId: {required}
           }
         },
         editorText: {
@@ -233,7 +232,7 @@
     },
     computed: {
       //Options translatables
-      optionsFields () {
+      optionsFields() {
         return {
           btn: {
             saveAndReturn: this.$tr('ui.message.saveAndReturn'),
@@ -244,7 +243,7 @@
     },
     methods: {
       //Init
-      async init () {
+      async init() {
         //Search id in params URL
         if (this.$route.params.id) this.itemId = this.$route.params.id
         if (this.itemId) await this.getData()//Get data if is edit
@@ -253,10 +252,10 @@
         gmaps.initializeGoogleApi(this.$store.getters['qsiteSettings/getSettingValueByName']('isite::api-maps'))
         this.initializeMap()
         //Set default button action
-        this.buttonActions = { label: this.optionsFields.btn.saveAndReturn, value: 1 }
+        this.buttonActions = {label: this.optionsFields.btn.saveAndReturn, value: 1}
       },
       //Get data item
-      getData () {
+      getData() {
         return new Promise((resolve, reject) => {
           this.loading.page = true
           const itemId = this.$clone(this.itemId)
@@ -266,7 +265,7 @@
               refresh: true,
               params: {
                 include: 'category,categories',
-                filter: { allTranslations: true }
+                filter: {allTranslations: true}
               }
             }
             //Request
@@ -283,7 +282,7 @@
               this.loading.page = false
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
               this.loading.page = false
               reject(false)//Resolve
             })
@@ -293,7 +292,7 @@
         })
       },
       //Init Map
-      initializeMap () {
+      initializeMap() {
         setTimeout(() => {
           //MAP
           var latitude = this.locale.formTemplate.address.latitude
@@ -318,7 +317,7 @@
 
           //Add a listener to the marker for reverse geocoding
           google.maps.event.addListener(this.map.marker, 'drag', () => {
-            this.geocoder.geocode({ 'latLng': this.map.marker.getPosition() }, (results, status) => {
+            this.geocoder.geocode({'latLng': this.map.marker.getPosition()}, (results, status) => {
               if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                   this.locale.formTemplate.address = {
@@ -333,9 +332,9 @@
         }, 500)
       },
       //Searchinto map
-      searchAddress (val, update, abort) {
+      searchAddress(val, update, abort) {
         let result = []
-        this.map.geocoder.geocode({ 'address': val }, (results, status) => {
+        this.map.geocoder.geocode({'address': val}, (results, status) => {
           results.forEach(address => {
             result.push({
               label: address.formatted_address,
@@ -350,12 +349,12 @@
         })
       },
       //Get place categories
-      getCategories () {
+      getCategories() {
         this.loading.categories = true
         let configName = 'apiRoutes.qplace.categories'
         let params = {//Params to request
           refresh: true,
-          params: { include: 'parent' },
+          params: {include: 'parent'},
         }
         //Request
         this.$crud.index(configName, params).then(response => {
@@ -367,12 +366,12 @@
 
           this.loading.categories = false
         }).catch(error => {
-          this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           this.loading.categories = false
         })
       },
       //Set address into map
-      selectAddress (item, keyboard) {
+      selectAddress(item, keyboard) {
         var location = new google.maps.LatLng(item.latitude, item.longitude)
         this.map.marker.setPosition(location)
         this.map.class.setCenter(location)
@@ -383,15 +382,15 @@
         }
       },
       //Return object to validations
-      getObjectValidation () {
+      getObjectValidation() {
         let response = {}
         if (this.locale && this.locale.formValidations) {
-          response = { locale: this.locale.formValidations }
+          response = {locale: this.locale.formValidations}
         }
         return response
       },
       //Complete slug Only when is creation
-      setSlug () {
+      setSlug() {
         if (!this.itemId) {
           let title = this.$clone(this.locale.formTemplate.title)
           title = title.split(' ').join('-').toLowerCase()
@@ -399,25 +398,25 @@
         }
       },
       //Create Product
-      async createItem () {
+      async createItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading.page = true
           this.$crud.create(this.configName, this.locale.form).then(response => {
-            this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')}` })
+            this.$alert.success({message: `${this.$tr('ui.message.recordCreated')}`})
             this.actionAfterCreated()
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
             this.loading.page = false
           })
         }
       },
       //Action after created
-      actionAfterCreated (id) {
+      actionAfterCreated(id) {
         setTimeout(() => {
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
-              this.$router.push({ name: 'qplace.admin.places.index' })
+              this.$router.push({name: 'qplace.admin.places.index'})
               break
             case 3://Reset and init form
               this.$refs.localeComponent.vReset()
@@ -427,16 +426,16 @@
         }, 500)
       },
       //Update Product
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading.page = true
           this.$crud.update(this.configName, this.itemId, this.locale.form).then(response => {
-            this.$alert.success({ message: `${this.$tr('ui.message.recordUpdated')}` })
-            this.$router.push({ name: 'qplace.admin.places.index' })//Redirect to index
+            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$router.push({name: 'qplace.admin.places.index'})//Redirect to index
             this.loading.page = false
           }).catch(error => {
             this.loading.page = false
-            this.$alert.error({ message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },

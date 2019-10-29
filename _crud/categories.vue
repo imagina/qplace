@@ -80,12 +80,12 @@
           formRight: {
             masterRecord : {
               label: this.$tr('ui.form.masterRecord'),
-              value: 0,
+              value: '0',
               isFakeField : true,
               type: 'select',
               options: [
-                {label: this.$tr('ui.label.yes'), value: 1},
-                {label: this.$tr('ui.label.no'), value: 0},
+                {label: this.$tr('ui.label.yes'), value: '1'},
+                {label: this.$tr('ui.label.no'), value: '0'},
               ]
             },
             parentId: {
@@ -93,6 +93,9 @@
               value: null,
               type: 'select',
               clearable: true,
+              options : [
+                {label: this.$tr('ui.label.disabled'), value: 0},
+              ],
               loadOptions: {
                 apiRoute: 'apiRoutes.qplace.categories',
                 select: {label: 'title', id: 'id'},
