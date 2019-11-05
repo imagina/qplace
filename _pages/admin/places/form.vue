@@ -128,14 +128,13 @@
   import {required} from 'vuelidate/lib/validators'
   import {gmaps} from '@imagina/qplace/_plugins/gmaps'
   //Components
-  import locales from '@imagina/qsite/_components/locales'
   import mediaForm from '@imagina/qmedia/_components/form'
-  import recursiveList from 'src/components/master/recursiveListSelect'
-  import schedulesForm from 'src/components/master/schedules'
+  import recursiveList from '@imagina/qsite/_components/master/recursiveListSelect'
+  import schedulesForm from '@imagina/qsite/_components/master/schedules'
 
   export default {
     props: {},
-    components: {locales, mediaForm, recursiveList, schedulesForm},
+    components: {mediaForm, recursiveList, schedulesForm},
     watch: {},
     validations() {
       return this.getObjectValidation()
