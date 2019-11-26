@@ -53,25 +53,17 @@
           </div>
           <!---Form Right-->
           <div class="col-12 col-md-4" v-if="locale.success">
-            <!---Component CRUD categories-->
-            <div class="text-right q-mb-xs">
-              <crud just-create @created="getCategories"
-                    :crud-data="import('@imagina/qplace/_crud/categories')"/>
-            </div>
             <!--Category-->
-            <q-select outlined dense bg-color="white" v-model="locale.formTemplate.categoryId"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]" :loading="loading.categories"
-                      :label="`${$tr('ui.form.category')}*`" style="width: 100%;"
-                      emit-value map-options :options="options.categories"/>
+            <crud just-create @created="getCategories" type="select"
+                  v-model="locale.formTemplate.categoryId" :crud-props="{
+                      label : `${$tr('ui.form.category')}*`,
+                      rules : [val => !!val || $tr('ui.message.fieldRequired')]}"
+                  :crud-data="import('@imagina/qplace/_crud/categories')"/>
             <!--Categories-->
-            <div class="input-title text-grey">
-              {{`${$trp('ui.form.category')}`}}
-              <!---Component CRUD categories-->
-              <crud just-create @created="getCategories"
-                    :crud-data="import('@imagina/qplace/_crud/categories')"/>
-            </div>
-            <recursive-list v-model="locale.formTemplate.categories"
-                            :items="options.categories"/>
+            <crud just-create @created="getCategories" type="select" v-model="locale.formTemplate.categories"
+                  :crud-props="{label : `${$trp('ui.form.category')}`, multiple : true, useChips : true}"
+                  :crud-data="import('@imagina/qplace/_crud/categories')"/>
+
             <!--schedules-->
             <schedules-form v-model="locale.formTemplate.schedules" class="q-mt-sm"/>
             <!--Image-->

@@ -1,17 +1,20 @@
 <template></template>
 <script>
-  //Component
-  import crud from '@imagina/qcrud/_components/crud'
-
   export default {
+    data() {
+      return {
+        crudId: this.$uid()
+      }
+    },
     computed: {
       crudData() {
         return {
+          crudId: this.crudId,
           apiRoute: 'apiRoutes.qplace.places',
           permission: 'iplaces.places',
           create: {
             title: this.$tr('qplace.layout.newPlace'),
-            to: 'qplace.admin.places.create',
+            to: {name : 'qplace.admin.places.create'},
           },
           read: {
             columns: [
@@ -31,6 +34,10 @@
           },
           delete: true
         }
+      },
+      //Crud info
+      crudInfo() {
+        return this.$store.state.qcrudComponent.component[this.crudId] || {}
       }
     },
   }

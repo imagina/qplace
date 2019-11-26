@@ -1,12 +1,15 @@
 <template></template>
 <script>
-  //Component
-  import crud from '@imagina/qcrud/_components/crud'
-
   export default {
+    data() {
+      return {
+        crudId: this.$uid()
+      }
+    },
     computed: {
       crudData() {
         return {
+          crudId: this.crudId,
           apiRoute: 'apiRoutes.qplace.categories',
           permission: 'iplaces.categories',
           create: {
@@ -38,90 +41,114 @@
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
             title: {
-              label: `${this.$tr('ui.form.title')}*`,
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props: {
+                label: `${this.$tr('ui.form.title')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             slug: {
-              label: `${this.$tr('ui.form.slug')}*`,
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props: {
+                label: `${this.$tr('ui.form.slug')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             description: {
-              label: `${this.$tr('ui.form.description')}*`,
               value: '',
               type: 'html',
               isTranslatable: true,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props: {
+                label: `${this.$tr('ui.form.description')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             metaTitle: {
-              label: this.$tr('ui.form.metaTitle'),
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
+              props: {
+                label: this.$tr('ui.form.metaTitle'),
+              }
             },
             metaDescription: {
-              label: this.$tr('ui.form.metaDescription'),
               value: '',
-              type: 'textarea',
+              type: 'input',
               isTranslatable: true,
+              props : {
+                label: this.$tr('ui.form.metaDescription'),
+                type: 'textarea',
+                rows : 2
+              }
             },
           },
           formRight: {
-            masterRecord : {
-              label: this.$tr('ui.form.masterRecord'),
+            masterRecord: {
               value: '0',
-              isFakeField : true,
+              isFakeField: true,
               type: 'select',
-              options: [
-                {label: this.$tr('ui.label.yes'), value: '1'},
-                {label: this.$tr('ui.label.no'), value: '0'},
-              ]
+              props : {
+                label: this.$tr('ui.form.masterRecord'),
+                options: [
+                  {label: this.$tr('ui.label.yes'), value: '1'},
+                  {label: this.$tr('ui.label.no'), value: '0'},
+                ]
+              }
             },
             parentId: {
-              label: this.$tr('ui.form.parent'),
-              value: null,
+              value: 0,
               type: 'select',
-              clearable: true,
-              options : [
-                {label: this.$tr('ui.label.disabled'), value: 0},
-              ],
+              props : {
+                label: this.$tr('ui.form.parent'),
+                clearable: true,
+                options: [
+                  {label: this.$tr('ui.label.disabled'), value: 0},
+                ],
+              },
               loadOptions: {
                 apiRoute: 'apiRoutes.qplace.categories',
                 select: {label: 'title', id: 'id'},
                 requestParams: {include: 'parent'}
               }
             },
-            status : {
-              label: `${this.$tr('ui.form.status')}:`,
+            status: {
               value: '1',
               type: 'select',
-              options: [
-                {label: this.$tr('ui.label.enabled'), value: '1'},
-                {label: this.$tr('ui.label.disabled'), value: '0'},
-              ],
+              props : {
+                label: `${this.$tr('ui.form.status')}:`,
+                options: [
+                  {label: this.$tr('ui.label.enabled'), value: '1'},
+                  {label: this.$tr('ui.label.disabled'), value: '0'},
+                ],
+              }
             },
             mediasSingle: {
               name: 'mediasSingle',
-              label: this.$tr('ui.form.image'),
               value: {},
               type: 'media',
-              zone: 'mainimage',
-              entity: "Modules\\Iplace\\Entities\\Category",
-              enitityId: null
+              props : {
+                label: this.$tr('ui.form.image'),
+                zone: 'mainimage',
+                entity: "Modules\\Iplace\\Entities\\Category",
+                enitityId: null
+              }
             },
           },
         }
+      },
+      //Crud info
+      crudInfo() {
+        return this.$store.state.qcrudComponent.component[this.crudId] || {}
       }
     },
   }
