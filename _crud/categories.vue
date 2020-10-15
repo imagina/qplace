@@ -140,7 +140,7 @@
                 label: this.$tr('ui.form.image'),
                 zone: 'mainimage',
                 entity: "Modules\\Iplace\\Entities\\Category",
-                enitityId: null
+                entityId: null
               }
             },
           },
