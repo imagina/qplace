@@ -240,7 +240,7 @@
         if (this.itemId) await this.getData()//Get data if is edit
         this.getCategories()//Get categories
         //Init Map
-        gmaps.initializeGoogleApi(this.$store.getters['qsiteSettings/getSettingValueByName']('isite::api-maps'))
+        gmaps.initializeGoogleApi(this.$store.getters['qsiteApp/getSettingValueByName']('isite::api-maps'))
         this.initializeMap()
         //Set default button action
         this.buttonActions = {label: this.optionsFields.btn.saveAndReturn, value: 1}

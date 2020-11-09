@@ -9,6 +9,9 @@ export default {
     title: 'qplace.sidebar.adminPlaces',
     icon: 'fas fa-map-marked-alt',
     authenticated: true,
+    subHeader: {
+      refresh: true
+    }
   },
 
   placesCreate: {
@@ -45,5 +48,8 @@ export default {
     title: 'qplace.sidebar.adminCategories',
     icon: 'fas fa-layer-group',
     authenticated: true,
+    subHeader: {
+      refresh: true
+    }
   }
 }
