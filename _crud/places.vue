@@ -35,6 +35,7 @@
               {
                 name: 'address', label: this.$tr('ui.form.address'), field: 'address', align: 'left',
                 classes: 'ellipsis', style: 'max-width : 250px',
+                format: val => val ? val.title : '-'
               },
               {
                 name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
@@ -46,10 +47,11 @@
               },
               {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
             ],
-            requestParams: {include: 'category,province,city'}
+            requestParams: {include: 'category,categories,province,city'}
           },
           update: {
-            title: this.$tr('qplace.layout.updatePlace')
+            title: this.$tr('qplace.layout.updatePlace'),
+            requestParams: {include: 'category,categories,province,city'}
           },
           delete: true,
           formLeft: {
@@ -133,21 +135,10 @@
               }
             },
             address: {
-              value: '',
-              type: 'input',
-              props: {
-                label: `${this.$tr('ui.form.address')}*`,
-                rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
-                ],
-              }
-            },
-            mapMarker: {
               value: null,
               type: 'positionMarkerMap',
-              isFakeField: true,
               props: {
-                label: this.$tr('ui.label.location')
+                label: this.$tr('ui.label.location'),
               }
             }
           },
