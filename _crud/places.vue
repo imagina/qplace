@@ -49,7 +49,8 @@
             requestParams: {include: 'category,province,city'}
           },
           update: {
-            title: this.$tr('qplace.layout.updatePlace')
+            title: this.$tr('qplace.layout.updatePlace'),
+            requestParams: {include: 'categories'}
           },
           delete: true,
           formLeft: {
