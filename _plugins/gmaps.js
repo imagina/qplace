@@ -1,5 +1,3 @@
-import store from 'src/store'
-
 class Gmaps {
 
   constructor() {
