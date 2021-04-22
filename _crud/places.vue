@@ -10,6 +10,7 @@
       crudData() {
         return {
           crudId: this.crudId,
+          entityName: config("main.qplace.entityNames.place"),
           apiRoute: 'apiRoutes.qplace.places',
           permission: 'iplaces.places',
           create: {
