@@ -13,6 +13,7 @@
           entityName: config("main.qplace.entityNames.category"),
           apiRoute: 'apiRoutes.qplace.categories',
           permission: 'iplaces.categories',
+          extraFormFields: 'iplaces.crud-fields.categories',
           create: {
             title: this.$tr('qplace.layout.newCategory'),
           },

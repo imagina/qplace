@@ -13,6 +13,7 @@
           entityName: config("main.qplace.entityNames.place"),
           apiRoute: 'apiRoutes.qplace.places',
           permission: 'iplaces.places',
+          extraFormFields: 'iplaces.crud-fields.places',
           create: {
             title: this.$tr('qplace.layout.newPlace')
           },
