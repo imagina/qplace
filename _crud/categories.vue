@@ -141,7 +141,7 @@
               props : {
                 label: this.$tr('ui.form.image'),
                 zone: 'mainimage',
-                entity: "Modules\\Iplace\\Entities\\Category",
+                entity: "Modules\\Iplaces\\Entities\\Category",
                 entityId: null
               }
             },
