@@ -15,44 +15,44 @@ export default {
         permission: 'iplaces.places',
         extraFormFields: 'iplaces.crud-fields.places',
         create: {
-          title: this.$tr('qplace.layout.newPlace')
+          title: this.$tr('iplaces.cms.newPlace')
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-            {name: 'title', label: this.$tr('ui.form.title'), field: 'title', align: 'rigth'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+            {name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'rigth'},
             {
-              name: 'category', label: this.$tr('ui.form.category'), field: 'category', align: 'left',
+              name: 'category', label: this.$tr('isite.cms.form.category'), field: 'category', align: 'left',
               format: val => val ? val.title : '-'
             },
-            {name: 'status', label: this.$tr('ui.form.status'), field: 'status', align: 'left'},
+            {name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'},
             {
-              name: 'province', label: this.$tr('ui.form.department'), field: 'province', align: 'left',
+              name: 'province', label: this.$tr('isite.cms.form.department'), field: 'province', align: 'left',
               format: val => val ? val.name : '-'
             },
             {
-              name: 'city', label: this.$tr('ui.form.city'), field: 'city', align: 'left',
+              name: 'city', label: this.$tr('isite.cms.form.city'), field: 'city', align: 'left',
               format: val => val ? val.name : '-'
             },
             {
-              name: 'address', label: this.$tr('ui.form.address'), field: 'address', align: 'left',
+              name: 'address', label: this.$tr('isite.cms.form.address'), field: 'address', align: 'left',
               classes: 'ellipsis', style: 'max-width : 250px',
               format: val => val ? val.title : '-'
             },
             {
-              name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
             {
-              name: 'updated_at', label: this.$tr('ui.form.updatedAt'), field: 'updatedAt', align: 'left',
+              name: 'updated_at', label: this.$tr('isite.cms.form.updatedAt'), field: 'updatedAt', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
-            {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+            {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
           ],
           requestParams: {include: 'category,categories,province,city'}
         },
         update: {
-          title: this.$tr('qplace.layout.updatePlace'),
+          title: this.$tr('iplaces.cms.updatePlace'),
           requestParams: {include: 'category,categories,province,city'}
         },
         delete: true,
@@ -64,9 +64,9 @@ export default {
             type: 'input',
             isTranslatable: true,
             props: {
-              label: `${this.$tr('ui.form.title')}*`,
+              label: `${this.$tr('isite.cms.form.title')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             }
           },
@@ -75,9 +75,9 @@ export default {
             type: 'input',
             isTranslatable: true,
             props: {
-              label: `${this.$tr('ui.form.slug')}*`,
+              label: `${this.$tr('isite.cms.form.slug')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             }
           },
@@ -86,11 +86,11 @@ export default {
             type: 'input',
             isTranslatable: true,
             props: {
-              label: `${this.$tr('ui.form.summary')}*`,
+              label: `${this.$tr('isite.cms.form.summary')}*`,
               type: 'textarea',
               rows: "3",
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             },
           },
@@ -99,9 +99,9 @@ export default {
             type: 'html',
             isTranslatable: true,
             props: {
-              label: `${this.$tr('ui.form.description')}*`,
+              label: `${this.$tr('isite.cms.form.description')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             }
           },
@@ -109,9 +109,9 @@ export default {
             value: null,
             type: 'select',
             props: {
-              label: this.$tr('ui.label.department') + '*',
+              label: this.$tr('isite.cms.label.department') + '*',
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             },
             loadOptions: {
@@ -124,10 +124,10 @@ export default {
             value: null,
             type: 'select',
             props: {
-              label: this.$tr('ui.form.city') + '*',
+              label: this.$tr('isite.cms.form.city') + '*',
               readonly: (this.crudInfo.provinceId ? false : true),
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             },
             loadOptions: {
@@ -140,7 +140,7 @@ export default {
             value: null,
             type: 'positionMarkerMap',
             props: {
-              label: this.$tr('ui.label.location'),
+              label: this.$tr('isite.cms.label.location'),
             }
           }
         },
@@ -149,7 +149,7 @@ export default {
             value: 5,
             type: 'rating',
             props : {
-              label : this.$tr('ui.label.rating')
+              label : this.$tr('isite.cms.label.rating')
             }
           },
           categoryId: {
@@ -159,9 +159,9 @@ export default {
               crudType: 'select',
               crudData: import('@imagina/qplace/_crud/categories'),
               crudProps: {
-                label: `${this.$tr('ui.form.category')}*`,
+                label: `${this.$tr('isite.cms.form.category')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               },
             },
@@ -173,7 +173,7 @@ export default {
               crudType: 'select',
               crudData: import('@imagina/qplace/_crud/categories'),
               crudProps: {
-                label: this.$trp('ui.form.category'),
+                label: this.$trp('isite.cms.form.category'),
                 multiple: true,
                 useChips: true
               },
@@ -183,10 +183,10 @@ export default {
             value: '1',
             type: 'select',
             props: {
-              label: `${this.$tr('ui.form.status')}:`,
+              label: `${this.$tr('isite.cms.form.status')}:`,
               options: [
-                {label: this.$tr('ui.label.enabled'), value: '1'},
-                {label: this.$tr('ui.label.disabled'), value: '0'},
+                {label: this.$tr('isite.cms.label.enabled'), value: '1'},
+                {label: this.$tr('isite.cms.label.disabled'), value: '0'},
               ],
             }
           },
@@ -195,7 +195,7 @@ export default {
             type: 'input',
             isFakeField: true,
             props: {
-              label: `${this.$tr('ui.form.phone')} 1`,
+              label: `${this.$tr('isite.cms.form.phone')} 1`,
               mask: 'phone',
               unmaskedValue: true
             }
@@ -205,7 +205,7 @@ export default {
             type: 'input',
             isFakeField: true,
             props: {
-              label: `${this.$tr('ui.form.phone')} 2`,
+              label: `${this.$tr('isite.cms.form.phone')} 2`,
               mask: 'phone',
               unmaskedValue: true
             }
@@ -215,7 +215,7 @@ export default {
             type: 'input',
             isFakeField: true,
             props: {
-              label: `${this.$tr('ui.form.phone')} 3`,
+              label: `${this.$tr('isite.cms.form.phone')} 3`,
               mask: 'phone',
               unmaskedValue: true
             }
@@ -225,7 +225,7 @@ export default {
             type: 'input',
             isFakeField: true,
             props: {
-              label: `${this.$tr('ui.form.email')}`,
+              label: `${this.$tr('isite.cms.form.email')}`,
               unmaskedValue: true
             }
           },
@@ -233,7 +233,7 @@ export default {
             value: null,
             type: 'schedule',
             props: {
-              //label: `${this.$tr('ui.label.schedules')}`,
+              //label: `${this.$tr('isite.cms.label.schedules')}`,
             }
           },
           mediasSingle: {
@@ -241,7 +241,7 @@ export default {
             value: {},
             type: 'media',
             props: {
-              label: this.$tr('ui.form.image'),
+              label: this.$tr('isite.cms.form.image'),
               zone: 'mainimage',
               entity: "Modules\\Iplaces\\Entities\\Place",
               entityId: null
@@ -251,7 +251,7 @@ export default {
             value: {},
             type: 'media',
             props: {
-              label: this.$tr('ui.form.gallery'),
+              label: this.$tr('isite.cms.form.gallery'),
               zone: 'gallery',
               entity: "Modules\\Iplaces\\Entities\\Place",
               entityId: null
