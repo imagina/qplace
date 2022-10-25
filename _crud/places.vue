@@ -117,7 +117,8 @@ export default {
             loadOptions: {
               apiRoute: 'apiRoutes.qlocations.provinces',
               select: {label: 'name', id: 'id'},
-              requestParams: {filter: {country: 48}}//only Colombia country
+              requestParams: {},
+              filterByQuery: true
             }
           },
           cityId: {
@@ -148,8 +149,8 @@ export default {
           rating: {
             value: 5,
             type: 'rating',
-            props : {
-              label : this.$tr('isite.cms.label.rating')
+            props: {
+              label: this.$tr('isite.cms.label.rating')
             }
           },
           categoryId: {
