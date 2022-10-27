@@ -109,10 +109,11 @@ export default {
             value: null,
             type: 'select',
             props: {
-              label: this.$tr('isite.cms.label.department') + '*',
-              rules: [
-                val => !!val || this.$tr('isite.cms.message.fieldRequired')
-              ],
+              label: this.$tr('isite.cms.label.department'),
+              clearable: true
+              // rules: [
+              //   val => !!val || this.$tr('isite.cms.message.fieldRequired')
+              // ],
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qlocations.provinces',
@@ -125,11 +126,12 @@ export default {
             value: null,
             type: 'select',
             props: {
-              label: this.$tr('isite.cms.form.city') + '*',
+              label: this.$tr('isite.cms.form.city'),
               readonly: (this.crudInfo.provinceId ? false : true),
-              rules: [
-                val => !!val || this.$tr('isite.cms.message.fieldRequired')
-              ],
+              clearable: true
+              // rules: [
+              //   val => !!val || this.$tr('isite.cms.message.fieldRequired')
+              // ],
             },
             loadOptions: {
               apiRoute: this.crudInfo.provinceId ? 'apiRoutes.qlocations.cities' : false,
