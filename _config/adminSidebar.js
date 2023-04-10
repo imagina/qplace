@@ -4,7 +4,7 @@ const pages = config('pages') // Get Pages from config
 export default [
   {
     title: 'iplaces.cms.sidebar.adminGroup',
-    icon: 'fas fa-map-marked-alt',
+    icon: 'fa-light fa-map-location-dot',
     children: [
       pages.qplace.places, // places setup
       pages.qplace.categories, // categories setup

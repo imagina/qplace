@@ -8,7 +8,7 @@ export default {
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
     title: 'iplaces.cms.sidebar.adminPlaces',
-    icon: 'fas fa-map-marked-alt',
+    icon: 'fa-light fa-map-location-dot',
     authenticated: true,
     subHeader: {
       refresh: true
@@ -24,7 +24,7 @@ export default {
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
     title: 'iplaces.cms.sidebar.adminCategories',
-    icon: 'fas fa-layer-group',
+    icon: 'fa-light fa-layer-group',
     authenticated: true,
     subHeader: {
       refresh: true
