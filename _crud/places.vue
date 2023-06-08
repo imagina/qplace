@@ -193,6 +193,14 @@ export default {
               ],
             }
           },
+          sortOrder: {
+            value: null,
+            type: 'input',
+            props: {
+              label: this.$tr('isite.cms.label.order'),
+              type: 'number'
+            }
+          },
           tags: {
             value: [],
             type: 'select',
