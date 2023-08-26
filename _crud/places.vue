@@ -255,7 +255,7 @@ export default {
           },
           schedules: {
             value: null,
-            type: 'schedule',
+            type: 'schedulable',
             props: {
               //label: `${this.$tr('isite.cms.label.schedules')}`,
             }
