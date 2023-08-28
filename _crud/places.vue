@@ -53,7 +53,7 @@ export default {
         },
         update: {
           title: this.$tr('iplaces.cms.updatePlace'),
-          requestParams: {include: 'category,categories,province,city'}
+          requestParams: {include: 'category,categories,province,city,schedule.workTimes'}
         },
         delete: true,
         formLeft: {
@@ -253,7 +253,7 @@ export default {
               unmaskedValue: true
             }
           },
-          schedules: {
+          schedule: {
             value: null,
             type: 'schedulable',
             props: {
