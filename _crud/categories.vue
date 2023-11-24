@@ -32,7 +32,7 @@
               },
               {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
-            requestParams: {include: 'parent'}
+            requestParams: {include: 'parent,qrs'}
           },
           update: {
             title: this.$tr('iplaces.cms.updateCategory'),

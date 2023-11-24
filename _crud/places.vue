@@ -49,7 +49,7 @@ export default {
             },
             {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
           ],
-          requestParams: {include: 'category,categories,province,city'}
+          requestParams: {include: 'category,categories,province,city,qrs'}
         },
         update: {
           title: this.$tr('iplaces.cms.updatePlace'),
