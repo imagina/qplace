@@ -58,7 +58,7 @@
   }
 </script>
 
-<style lang="stylus">
+<style lang="sass">
   .location-title
     top -30px
     left 0
