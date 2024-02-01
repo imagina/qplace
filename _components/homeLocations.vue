@@ -58,7 +58,7 @@
   }
 </script>
 
-<style lang="sass">
+<style lang="scss">
   .location-title
     top -30px
     left 0
