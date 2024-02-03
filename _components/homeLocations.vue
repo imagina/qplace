@@ -59,18 +59,21 @@
 </script>
 
 <style lang="scss">
-  .location-title
-    top -30px
-    left 0
+.location-title {
+  top: -30px;
+  left: 0;
+}
 
-  .place-content
-    cursor pointer
-    background-color rgba(0, 0, 0, .7)
+.place-content {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .7);
+}
 
-  .home-locations
-    min-height 310px
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.home-locations {
+  min-height: 310px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
