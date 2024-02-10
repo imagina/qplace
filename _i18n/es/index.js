@@ -1,5 +1,5 @@
-import layout from '@imagina/qplace/_i18n/es/layout'
-import sidebar from '@imagina/qplace/_i18n/es/sidebar'
+import layout from 'modules/qplace/_i18n/es/layout'
+import sidebar from 'modules/qplace/_i18n/es/sidebar'
 
 export default {
   layout,

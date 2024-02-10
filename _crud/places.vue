@@ -160,7 +160,7 @@ export default {
             type: 'crud',
             props: {
               crudType: 'select',
-              crudData: import('@imagina/qplace/_crud/categories'),
+              crudData: import('modules/qplace/_crud/categories'),
               crudProps: {
                 label: `${this.$tr('isite.cms.form.category')}*`,
                 rules: [
@@ -174,7 +174,7 @@ export default {
             type: 'crud',
             props: {
               crudType: 'select',
-              crudData: import('@imagina/qplace/_crud/categories'),
+              crudData: import('modules/qplace/_crud/categories'),
               crudProps: {
                 label: this.$trp('isite.cms.form.category'),
                 multiple: true,
