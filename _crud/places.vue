@@ -196,8 +196,9 @@ export default {
           sortOrder: {
             value: null,
             type: 'input',
+            required: true,
             props: {
-              label: this.$tr('isite.cms.label.order'),
+              label: `${this.$tr('isite.cms.label.order')}*`,
               type: 'number'
             }
           },
