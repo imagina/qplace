@@ -268,7 +268,7 @@ export default {
             props: {
               label: this.$tr('isite.cms.form.image'),
               zone: 'mainimage',
-              entity: "Modules\\Iplaces\\Entities\\Place",
+              entity: "Modules\\Iplaces\\Models\\Place",
               entityId: null
             }
           },
@@ -278,7 +278,7 @@ export default {
             props: {
               label: this.$tr('isite.cms.form.gallery'),
               zone: 'gallery',
-              entity: "Modules\\Iplaces\\Entities\\Place",
+              entity: "Modules\\Iplaces\\Models\\Place",
               entityId: null
             }
           }

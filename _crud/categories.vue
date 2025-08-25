@@ -141,7 +141,7 @@
               props : {
                 label: this.$tr('isite.cms.form.image'),
                 zone: 'mainimage',
-                entity: "Modules\\Iplaces\\Entities\\Category",
+                entity: "Modules\\Iplaces\\Models\\Category",
                 entityId: null
               }
             },
